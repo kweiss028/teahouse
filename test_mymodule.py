@@ -1,16 +1,13 @@
 import unittest
-from mymodule import Cup
+from mymodule import CoffeeMachine
 
-teacup = Cup('tea', 1.80)
-teaTime = int(teacup._timestamp)
+teacup = CoffeeMachine('tea').product
+coffee = CoffeeMachine('coffee').product
 
-coffee = Cup('coffee', 2.10)
-coffeeTime = int(coffee._timestamp)
 
-def almost_equal(resultTemp, expectedTemp):    # tolerance for function slowness
-    difference = expectedTemp - resultTemp
-    return (difference >= 0 and difference <= 2)
-
+def almost_equal(result_temp, expected_temp):    # tolerance for function slowness
+    difference = expected_temp - result_temp
+    return 0 <= difference <= 2
 
 
 class TestMyModule(unittest.TestCase):
@@ -19,6 +16,13 @@ class TestMyModule(unittest.TestCase):
         self.assertTrue(hasattr(teacup, 'full'))
         self.assertFalse(hasattr(teacup, 'fill'))
 
+    def test_wrong_drink(self):
+        self.assertIsInstance(CoffeeMachine('bread').product, str)
+
+    def test_price(self):
+        self.assertTrue(hasattr(teacup, 'price'))
+        self.assertEqual(teacup.price, 1.80)
+        
     def test_drink(self):
         teacup.drink(0.2)
         self.assertRaises(Exception, teacup.drink, -2)
@@ -37,10 +41,9 @@ class TestMyModule(unittest.TestCase):
     def test_cool_down(self):    
         self.assertEqual(coffee._init_temp, 80)
         coffee._timestamp -= 1200    # set back start time by 20 minutes
-        startTemp = coffee.temp
+        start_temp = coffee.temp
         coffee.heat_up(20)
-        self.assertTrue(almost_equal(coffee.temp, startTemp + 20))    
-
+        self.assertTrue(almost_equal(coffee.temp, start_temp + 20))
 
 
 if __name__ == '__main__':
