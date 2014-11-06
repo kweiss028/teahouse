@@ -34,23 +34,20 @@ class Cup(object):
         
 
 class CoffeeMachine(object):
+    _price_list = {
+        'tea': 1.80,
+        'coffee': 2.10,
+        'latte': 2.60,
+        'chocolate': 2.10,
+        'chai': 2.40
+    }
+
     def __init__(self, drink_type):
         self.type = drink_type
-        
-    @property
-    def _price_list(self):
-        return {
-            'tea': 1.80,
-            'coffee': 2.10,
-            'latte': 2.60,
-            'chocolate': 2.10,
-            'chai': 2.40
-        }
 
     @property
     def _price(self):
-        available = self.type in self._price_list
-        if available:
+        if self.type in self._price_list:
             return self._price_list[self.type]
         else:
             return False
