@@ -1,9 +1,9 @@
 import unittest
 from mymodule import CoffeeMachine
 
-teacup = CoffeeMachine('tea').product
-coffee_cup = CoffeeMachine('coffee').product
-bread_cup = CoffeeMachine('bread').product
+teacup = CoffeeMachine.brew('tea')
+coffee_cup = CoffeeMachine.brew('coffee')
+bread_cup = CoffeeMachine.brew('bread')
 
 
 def almost_equal(result_temp, expected_temp):    # tolerance for function slowness
@@ -24,7 +24,7 @@ class TestMyModule(unittest.TestCase):
     def test_right_drink(self):
         self.assertIsInstance(teacup, object)
         self.assertTrue(hasattr(teacup, 'price'))
-        self.assertEqual(teacup.price, CoffeeMachine._price_list['tea'])
+        self.assertEqual(teacup.price, 1.80)
         
     def test_drink(self):
         teacup.drink(0.2)

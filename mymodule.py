@@ -34,28 +34,17 @@ class Cup(object):
         
 
 class CoffeeMachine(object):
-    _price_list = {
-        'tea': 1.80,
-        'coffee': 2.10,
-        'latte': 2.60,
-        'chocolate': 2.10,
-        'chai': 2.40
-    }
 
-    def __init__(self, drink_type):
-        self.type = drink_type
-
-    @property
-    def _price(self):
-        if self.type in self._price_list:
-            return self._price_list[self.type]
-        else:
-            return False
-
-    @property
-    def product(self):
-        price = self._price
-        if price:
-            return Cup(self.type, price)
+    @staticmethod
+    def brew(drink):
+        price_list = {
+            'tea': 1.80,
+            'coffee': 2.10,
+            'latte': 2.60,
+            'chocolate': 2.10,
+            'chai': 2.40
+        }
+        if drink in price_list:
+            return Cup(drink, price_list[drink])
         else:
             return 'Drink not available.'
