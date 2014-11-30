@@ -10,7 +10,7 @@ Tests for `teahouse` module.
 
 import unittest
 
-from teahouse import CoffeeMachine
+from teahouse.teahouse import CoffeeMachine
 
 
 def almost_equal(result_temp, expected_temp):    # tolerance for function slowness
@@ -18,7 +18,7 @@ def almost_equal(result_temp, expected_temp):    # tolerance for function slowne
     return 0 <= difference <= 2
 
 
-class TestTeahouse(unittest.TestCase):
+class TestCupFunctions(unittest.TestCase):
 
     def setUp(self):
         self.teacup = CoffeeMachine.brew('tea')
@@ -37,7 +37,7 @@ class TestTeahouse(unittest.TestCase):
         self.assertIsInstance(self.teacup, object)
         self.assertTrue(hasattr(self.teacup, 'price'))
         self.assertEqual(self.teacup.price, 1.80)
-        
+
     def test_drink(self):
         self.teacup.drink(0.2)
         self.assertRaises(Exception, self.teacup.drink, -2)
